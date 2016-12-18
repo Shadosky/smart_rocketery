@@ -18,6 +18,9 @@ var lifespan = 400;
 var popSize = 50;
 var mutation = true;
 var useObstacle = true;
+var vertexRockets = false;
+
+var checkboxVertex;
 
 
 function setup() {
@@ -33,6 +36,9 @@ function setup() {
 	lifeP = createP();
 	genP = createP();
 	lendP = createP();
+
+	checkboxVertex = createCheckbox('Use Vertex Rockets', false);
+  	checkboxVertex.changed(vertexEvent);
 	
 }
 
@@ -51,11 +57,18 @@ function draw() {
 	if(count == lifespan) 
 	{		
 		population.evaluate();
-		console.log(population);
 		population = population.select();
 		generation ++;
 		count = 0;
 		points = 0;
 	}
 	
+}
+
+function vertexEvent() {
+  if (this.checked()) {
+    vertexRockets = true;
+  } else {
+    vertexRockets = false;
+  }
 }

@@ -17,6 +17,7 @@ function Obstacle (position, len, hei) {
     {
 		if(this.active) {
 			fill(250, 0, 0);
+			stroke(0);
 			push();
 			translate(this.position.x, this.position.y);
 			rect(0, 0, this.size, this.sick);

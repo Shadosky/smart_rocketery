@@ -19,12 +19,67 @@ function Rocket(dna)
 	
 	this.show = function()
     {
-		fill(250, 200, 0);
 		push();
 		translate(this.position.x, this.position.y);
 		rotate(this.velocity.heading());
-		rectMode(CENTER);
-		rect(0, 0, 25, 5);
+
+		if (vertexRockets) {
+			var drawXScale = 2.5;
+			var drawYScale = -4;
+			
+			// use (y, x) to draw 
+			// i know it's weird
+			fill(3, 169, 244);
+			beginShape();
+			vertex( 0*drawYScale, 0);
+			vertex( 0*drawYScale, 1*drawXScale);
+			vertex( 1*drawYScale, 1*drawXScale);
+			vertex( 1*drawYScale, 2*drawXScale);
+			vertex( 1*drawYScale, 2*drawXScale);
+			vertex( 3*drawYScale, 3*drawXScale);
+			vertex( 7*drawYScale, 3*drawXScale);
+			vertex( 7*drawYScale, 4*drawXScale);
+			vertex( 8*drawYScale, 4*drawXScale);
+			vertex( 8*drawYScale, 5*drawXScale);
+			vertex( 9*drawYScale, 5*drawXScale);
+			vertex( 9*drawYScale, 4*drawXScale);
+			vertex(10*drawYScale, 4*drawXScale);
+			vertex(10*drawYScale, 3*drawXScale);
+			vertex( 9*drawYScale, 3*drawXScale);
+			// second part
+			vertex( 9*drawYScale, -3*drawXScale);
+			vertex(10*drawYScale, -3*drawXScale);
+			vertex(10*drawYScale, -4*drawXScale);
+			vertex( 9*drawYScale, -4*drawXScale);
+			vertex( 9*drawYScale, -5*drawXScale);
+			vertex( 8*drawYScale, -5*drawXScale);
+			vertex( 8*drawYScale, -4*drawXScale);
+			vertex( 7*drawYScale, -4*drawXScale);
+			vertex( 7*drawYScale, -3*drawXScale);
+			vertex( 3*drawYScale, -3*drawXScale);
+			vertex( 1*drawYScale, -2*drawXScale);
+			vertex( 1*drawYScale, -2*drawXScale);
+			vertex( 1*drawYScale, -1*drawXScale);
+			vertex( 0*drawYScale, -1*drawXScale);
+
+			endShape(CLOSE);
+
+			fill(244);
+			beginShape();
+			// let's add a window
+			vertex( 5*drawYScale,  1*drawXScale);
+			vertex( 8*drawYScale,  1*drawXScale);
+			vertex( 8*drawYScale, -1*drawXScale);
+			vertex( 5*drawYScale, -1*drawXScale);
+
+			endShape(CLOSE);
+		} else {
+			fill(3, 169, 244);
+			rectMode(CENTER);
+			rect(0, 0, 25, 5);
+		}
+		
+		
 		pop();
     }
 	
@@ -35,7 +90,7 @@ function Rocket(dna)
 			points ++;
 			this.success = true;
 			this.position = target.position;
-		} else if(this.position.x < 0 || this.position.x > width || this.position.y < 0 || this.position.y > height) {
+		} else if(this.position.x < 0 || this.position.x > width || this.position.y > height || this.position.y < 0) {
 			this.crash = true;
 		} else if (obstacle.active) {
 			if((this.position.x > obstacle.position.x && this.position.x < obstacle.position.x + obstacle.size) &&
